@@ -35,6 +35,34 @@ class qrcode : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_qrcode)
+        val user = intent.getStringExtra("user")
+        val email = intent.getStringExtra("email")
+        val year = intent.getStringExtra("year")
+        val calen = findViewById<Button>(R.id.calendar)
+        calen.setOnClickListener {
+            val intent = Intent(this, calendar::class.java)
+            intent.putExtra("user", user)
+            intent.putExtra("email", email)
+            intent.putExtra("year",year)
+            startActivity(intent)
+        }
+        val work = findViewById<Button>(R.id.work)
+        work.setOnClickListener {
+            if(year == "4"){
+                val intent = Intent(this,work::class.java)
+                intent.putExtra("user", user)
+                intent.putExtra("email", email)
+                intent.putExtra("year",year)
+                startActivity(intent)
+            }
+            else{
+                val intent = Intent(this,mywork::class.java)
+                intent.putExtra("user", user)
+                intent.putExtra("email", email)
+                intent.putExtra("year",year)
+                startActivity(intent)
+            }
+        }
 
         fun generateQRCode(text: String): Bitmap {
             val writer = QRCodeWriter()
@@ -50,7 +78,6 @@ class qrcode : ComponentActivity() {
             return bmp
         }
 
-        val user = intent.getStringExtra("user")
         val name = findViewById<TextView>(R.id.name)
         name.text = user
         val qrCodeBitmap = generateQRCode(user!!)

@@ -54,8 +54,6 @@ class MainActivity : AppCompatActivity() {
         val userservice = retrofit.create(UserService::class.java)
         var userData = UserData("John Doe", "supersecret","johndoemail.com","4")
 
-
-
         val logincheck = retrofit.create(LoginCheck::class.java)
 
         val login = findViewById<Button>(R.id.login)
@@ -152,6 +150,9 @@ class MainActivity : AppCompatActivity() {
             ok.setOnClickListener{
                 if(username.text.toString() == "" || (pd1.text.toString() == "" ) || (pd2.text.toString() == "") || (email.text.toString() == "") || (year.text.toString() == "")){
                     Toast.makeText(this@MainActivity, "Fill all fields", Toast.LENGTH_SHORT).show()
+                }
+                else if(year.text.toString() != "1" && year.text.toString() != "2" && year.text.toString() != "3" && year.text.toString() != "4"){
+                    Toast.makeText(this@MainActivity, "Invalid Year", Toast.LENGTH_SHORT).show()
                 }
                 else if(pd1.text.toString() == pd2.text.toString()){
                     userData = UserData(username.text.toString(),pd1.text.toString(),email.text.toString(),year.text.toString())
